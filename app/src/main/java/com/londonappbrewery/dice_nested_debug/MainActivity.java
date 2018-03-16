@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button myButton = (Button) findViewById(R.id.rollButton);
 
+        final TextView diceResult = (TextView) findViewById(R.id.diceResult);
+
         final int[] diceArray = new int[] {
                 R.drawable.dice1,
                 R.drawable.dice2,
@@ -34,16 +37,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Random randomNumberGenerator = new Random();
-                int number = randomNumberGenerator.nextInt(7);
+                int number = randomNumberGenerator.nextInt(6);
+                int result = (number + 1);
                 Log.d("Dicee", "The number for the left dice is " + number);
 
                 int imageResourceId = diceArray[number];
                 leftDice.setImageResource(imageResourceId);
 
-                number = randomNumberGenerator.nextInt(100);
+                number = randomNumberGenerator.nextInt(6);
+                result = result + (number + 1);
                 Log.d("Dicee", "The number for the right dice is " + number);
                 imageResourceId = diceArray[number];
                 rightDice.setImageResource(imageResourceId);
+
+                diceResult.setText("Sum = "+result);
             }
         });
 
